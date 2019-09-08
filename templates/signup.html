@@ -1,0 +1,136 @@
+{% extends "layout.html" %} {% block title %} Register {% endblock %} {% block
+header %}
+{{ super() }}
+{% include 'includes/bottom-header.html'%} {% endblock %} {% block main %}
+
+<section
+  class="breadcrumb-area"
+  style="background-image:url({{url_for('static', filename = 'images/background/2.jpg')}}  );"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="breadcrumbs text-center">
+          <h1>Register</h1>
+          <h4>Welcome to Coder School Organic Blog</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="breadcrumb-bottom-area">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-5 col-sm-5">
+          <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li>
+              <a href="#"><i class="fa fa-angle-right"></i></a>
+            </li>
+            <li>Register</li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-7 col-sm-7">
+          <p>We provide <span>100% organic</span> products</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Account Page Content*********************** -->
+<div class="account_page">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2 col-md-2"></div>
+      <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 register_form">
+        <div class="theme-title">
+          <h2>Register Here</h2>
+        </div>
+        <form action="#">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <div class="form_group">
+                <label>Username</label>
+                <div class="input_group">
+                  <input type="text" />
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                </div>
+                <!-- End of .input_group -->
+              </div>
+              <!-- End of .form_group -->
+
+              <div class="form_group">
+                <label>Password</label>
+                <div class="input_group">
+                  <input type="password" />
+                  <i class="fa fa-lock" aria-hidden="true"></i>
+                </div>
+                <!-- End of .input_group -->
+              </div>
+              <!-- End of .form_group -->
+
+              <div class="form_group">
+                <label>Phone Number</label>
+                <div class="input_group">
+                  <input type="text" />
+                  <i class="fa fa-phone" aria-hidden="true"></i>
+                </div>
+                <!-- End of .input_group -->
+              </div>
+              <!-- End of .form_group -->
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <div class="form_group">
+                <label>Email Address</label>
+                <div class="input_group">
+                  <input type="email" />
+                  <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                </div>
+                <!-- End of .input_group -->
+              </div>
+              <!-- End of .form_group -->
+
+              <div class="form_group">
+                <label>Confirm Password</label>
+                <div class="input_group">
+                  <input type="password" />
+                  <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                </div>
+                <!-- End of .input_group -->
+              </div>
+              <!-- End of .form_group -->
+
+              <div class="form_group">
+                <label>Location</label>
+                <div class="input_group">
+                  <input type="text" />
+                  <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                </div>
+                <!-- End of .input_group -->
+              </div>
+              <!-- End of .form_group -->
+            </div>
+          </div>
+          <!-- End of .row -->
+
+          <div class="clear_fix">
+            <div class="single_checkbox float_left">
+              <input type="checkbox" id="terms" />
+              <label for="terms">I agree the term’s & conditions</label>
+            </div>
+            <!-- End .single_checkbox -->
+          </div>
+          <button class="color1_bg tran3s">Create Account</button>
+        </form>
+      </div>
+      <!-- End of .register_form -->
+      <div class="col-lg-2 col-md-2"></div>
+      <!-- End of .login_form -->
+    </div>
+    <!-- End of .row -->
+  </div>
+  <!-- End of .container -->
+</div>
+<!-- End of .account_page -->
+{% endblock %}

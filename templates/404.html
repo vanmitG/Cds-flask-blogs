@@ -1,0 +1,40 @@
+{% extends "layout.html" %} {% block title %} 404 {% endblock %} {% block header
+%}
+{{ super() }}
+{% include 'includes/bottom-header.html'%} {% endblock %} {% block main %}
+<div
+  class="has-base-color-overlay sec-pad text-center error-404"
+  style="background-image:url({{url_for('static', filename = 'images/background/404.jpg')}}  );"
+>
+  <div class="container">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="top-box">
+        <figure class="text-center">
+          <img
+            src="{{url_for('static', filename = 'images/logo/404.png')}} "
+            alt=""
+          />
+        </figure>
+        <h2>Sorry but we could not find this page.</h2>
+      </div>
+      <!-- /.top-box -->
+      <p>
+        The page you are looking for does not exist.
+        <span
+          ><a href="{{ url_for('index') }}" style="color: #7fb401"
+            >Back to Homepage!</a
+          >
+        </span>
+      </p>
+      <!-- <div class="search-box text-center">
+        <form action="#" class="clearfix">
+          <input type="text" placeholder="Search..." />
+          <button><i class="fa fa-search"></i></button>
+        </form>
+      </div> -->
+    </div>
+    <!-- /.col-md-10 col-md-offset-1 -->
+  </div>
+  <!-- /.container -->
+</div>
+{% endblock %}

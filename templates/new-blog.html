@@ -1,0 +1,55 @@
+{% from "includes/bottom-header.html" import render_bottom_header %} {% from
+"macros/bread-crumb.html" import render_breadcrumb %} {% extends "layout.html"
+%} {% block title %} Profile {% endblock %} {% block header %}
+{{ super() }}
+{{ render_bottom_header(name) }} {% endblock %} {% block main %} {% include
+'includes/navigation.html' %}
+{{ render_breadcrumb(name, page_name) }}
+
+<section class="award">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 col-sm-8 col-xs-12">
+        <div class="reply-box">
+          <div class="theme_title ">
+            <h2>your new blog</h2>
+          </div>
+          <form>
+            <div class="row">
+              <div class="col-md-9">
+                <input type="text" placeholder="Title*" />
+              </div>
+              <!-- /.col-md-6 -->
+              <div class="col-md-9">
+                <input type="text" placeholder="image_url*" />
+              </div>
+              <!-- /.col-md-6 -->
+
+              <div class="col-md-9">
+                <textarea placeholder="inspire quote"></textarea>
+              </div>
+              <div class="col-md-9">
+                <textarea placeholder="your thought*"></textarea>
+              </div>
+              <!-- /.col-md-12 -->
+              <div class="col-md-9">
+                <button type="submit" class="color1_bg">Post New Blog</button>
+              </div>
+              <!-- /.col-md-12 -->
+            </div>
+            <!-- /.row -->
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 sidebar_styleTwo">
+        <!-- _______________________ SIDEBAR ____________________ -->
+        {% include 'includes/side-bar.html' %}
+        <!-- End of .sidebar_styleTwo -->
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %} {% block footer %} {% include 'includes/main-footer.html' %}
+{{ super() }}
+{% endblock %}

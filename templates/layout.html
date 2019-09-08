@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Mirrored from steelthemes.com/demo/html/organic_store/blog-list-sidebar.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 23 Aug 2019 08:20:04 GMT -->
+  <head>
+    {% block head %}
+    <meta charset="UTF-8" />
+    <!-- For IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- For Resposive Device -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <title>{% block title %}{% endblock %} Organic Store</title>
+    <!-- Favicon -->
+    {% include 'includes/link-img-css.html'%} {% endblock %}
+  </head>
+
+  <body>
+    <div class="main_page">
+      <!-- Header *******************************  -->
+      <header>
+        {% block header %} {% include 'includes/top-header.html'%} {% endblock%}
+      </header>
+      <div id="main">{% block main %}{% endblock %}</div>
+
+      <!-- Footer************************* -->
+      <footer>
+        {% block footer %}{% endblock %} {% include
+        'includes/bottom-footer.html' %}
+      </footer>
+
+      <!-- Scroll Top Button -->
+      <button class="scroll-top tran3s color2_bg">
+        <span class="fa fa-angle-up"></span>
+      </button>
+      <!-- pre loader  -->
+      <div id="loader-wrapper">
+        <div id="loader"></div>
+      </div>
+
+      {% include 'includes/js-script.html' %}
+    </div>
+    <!-- End of .main_page -->
+  </body>
+
+  <!-- Mirrored from steelthemes.com/demo/html/organic_store/blog-list-sidebar.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 23 Aug 2019 08:20:57 GMT -->
+</html>
