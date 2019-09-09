@@ -3,6 +3,7 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, login_
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "KhoaTheBestDestroyer"
@@ -17,6 +18,8 @@ login_mgr.init_app(app)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://coderSchool:abc123@localhost:5432/blogsCDS'
 db = SQLAlchemy(app)
+
+migrate = Migrate(app, db)
 
 
 class Test(db.Model):
@@ -53,6 +56,7 @@ class Posts(db.Model):
     created_date = db.Column(db.DateTime, default=datetime.now)
     updated_date = db.Column(db.DateTime, default=datetime.now)
     author = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    view_count = db.Column(db.Integer, default=0)
     comments = db.relationship('Comments', backref="posts", lazy="dynamic")
 
 
@@ -73,11 +77,11 @@ def load_user(id):
     return Users.query.get(int(id))
 
 
-@login_mgr.unauthorized_handler
-def unauthorized():
-    # do stuff
-    # return a_response
-    pass
+# @login_mgr.unauthorized_handler
+# def unauthorized():
+#     # do stuff
+#     # return a_response
+#     pass
 
 
 @app.route('/')
@@ -114,10 +118,18 @@ def logout():
     return redirect(url_for('login'))
 
 
-@app.route('/blogs/<id>')
+@app.route('/blogs/<int:blog_id>')
 @login_required
-def blogDetail(id):
-    return render_template('blog-details.html', page_name='blog', id=1)
+def blogDetail(blog_id):
+    post = Posts.query.get_or_404(blog_id)
+    user = Users.query.filter_by(id=post.author).first_or_404()
+    # db.session.commit()
+    context = {
+        'page_name': 'blog',
+        'post': post,
+        'author': user
+    }
+    return render_template('blog-details.html', **context)
 
 
 @app.route('/create_blog', methods=['POST', 'GET'])
@@ -132,10 +144,9 @@ def create_blog():
         db.session.commit()
         flash(
             f'Successfuly create new blog "{new_post.title}".', 'success')
-        post_id = 1
-        return redirect(url_for('blogDetail', id=post_id))
+        return redirect(url_for('blogDetail', id=new_post.id))
     else:
-        flash('method not Post', 'info')
+        flash('blog was not post correctly! Post again', 'info')
         return render_template('new-blog.html', page_name='Create Blog')
 
 
@@ -159,8 +170,9 @@ def signup():
 
 
 @app.route('/profile')
+@login_required
 def profile():
-    return render_template('profile.html', name="Khuong", page_name='profile', id=1)
+    return render_template('profile.html', page_name='profile', id=1)
 
 
 @app.errorhandler(404)

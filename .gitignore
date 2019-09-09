@@ -2,3 +2,5 @@ venv/
 temp_templates/
 note.txt
 .vscode/
+test.html
+*.sql

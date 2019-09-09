@@ -7,7 +7,7 @@ header %}
 			<!-- Menu ******************************* -->
 			{% include 'includes/navigation.html' %}
 			<!-- End of .theme_menu -->
-			{{render_breadcrumb(name,page_name)}}
+			{{render_breadcrumb(author.last_name,page_name)}}
 
 		<section class="news single_news_page with_sidebar news_single">
 			<div class="container">
@@ -16,35 +16,35 @@ header %}
 						<div class="single_left_bar">
 							<div class="blogList_single_post clear_fix wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
 										<div class="img_holder">
-									<img src="{{url_for('static', filename='images/blog/4.jpg')}}  " alt="News" class="img-responsive">
+									<img src="{{url_for('static', filename=post.img_url)}}  " alt="News" class="img-responsive">
 									<div class="opacity tran3s">
 										<div class="icon">
-											<span><a href="blog-details.html" class="border_round">+</a></span>
+											<span><a href="#" class="border_round"><i class="fa fa-heart"></i></a></span>
 										</div> <!-- End of .icon -->
 									</div> <!-- End of .opacity -->
 								</div> <!-- End of .img_holder -->
 								<div class="post">
 										
 									<div class="text">
-										<h4><a href="blog-details.html">Interesting facts about organic food and organic store.</a></h4>
+										<h4><a href="#">{{post.title}}</a></h4>
 										<ul>
-											<li><a href="blog-details.html" class="tran3s"><i class="fa fa-user" aria-hidden="true"></i> John abraham</a></li>
-											<li><a href="blog-details.html" class="tran3s"><i class="fa fa-tag" aria-hidden="true"></i> Healthy</a></li>
-											<li><a href="blog-details.html" class="tran3s"><i class="fa fa-clock-o" aria-hidden="true"></i> J21st Aug, 2015</a></li>
-											<li><a href="blog-details.html" class="tran3s"><i class="fa fa-comments" aria-hidden="true"></i> 26</a></li>
-											<li><a href="blog-details.html" class="tran3s"><i class="fa fa-heart" aria-hidden="true"></i> 26</a></li>
+											<li><a href="#" class="tran3s"><i class="fa fa-user" aria-hidden="true"></i> {{author.last_name}}</a></li>
+											<li><a href="#" class="tran3s"><i class="fa fa-tag" aria-hidden="true"></i> Healthy</a></li>
+											<li><a href="#" class="tran3s"><i class="fa fa-clock-o" aria-hidden="true"></i>{{post.updated_date}}</a></li>
+											<li><a href="#" class="tran3s"><i class="fa fa-comments" aria-hidden="true"></i> 26</a></li>
+											<li><a href="#" class="tran3s"><i class="fa fa-heart" aria-hidden="true"></i> 26</a></li>
 										</ul>
-										<p>How all this mistaken idea denouncing pleasure and praising will give you a completed  take a trivial sed example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with man sed who chooses to enjoyonsequences which of us every physical exercise.</p><p>
-										Praising will give you a completed  take a trivial sed example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with man sed who chooses to enjoy.</p>
+										<p>{{post.body}}.</p><p>
+										{{post.body}}</p>
 										
 									</div>
 									<div class="qoute">
 										<h3>
-										 Men who are so beguiled and demoralized by the charms of pleasure of <br> the moment, so blinded by desire, they cannot foresee.</h3>
-										 <span class="author color1">- Bianca Jones -	</span>
+										 {{post.quote}}</h3>
+										 <span class="author color1">-{{author.first_name}} {{author.last_name}}-	</span>
 									</div>
 									<div class="text"><p>
-									All this mistaken idea of denouncing pleasure and praising pain was born and I will give you seds our complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. </p></div>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis incidunt doloribus voluptatem velit, quaerat illum? Minus beatae dolor dolorum ipsa vel facere! Ullam nam perspiciatis dolorem animi, corrupti aperiam ut. </p></div>
 									<div class="share_option clear_fix">
 										<h4 class="float_left">If you like this post, please share to others.</h4>
 										<ul class="social_icon float_left">
@@ -54,7 +54,6 @@ header %}
 													<li><a href="#" class="tran3s" title="Youtube"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
 												</ul>
 									</div>
-									
 								</div> <!-- End of .post -->
 
 								<div class="author-post">
@@ -65,11 +64,11 @@ header %}
 														</div>
 														<div class="single-comment-box">
 																<div class="img-box">
-																		<img src="https://randomuser.me/api/portraits/women/58.jpg" alt="Awesome Image">
+																		<img src="{{author.img_url}}">
 																</div>
 																<div class="text-box">
 																		<div class="top-box">
-																				<h2>Robecca Garza</h2>
+																				<h2>{{author.first_name}} {{author.last_name}}</h2>
 																			 
 																		</div>
 																		<div class="content">
