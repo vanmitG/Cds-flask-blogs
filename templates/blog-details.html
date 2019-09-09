@@ -3,7 +3,7 @@
 {% extends "layout.html" %} {% block title %} Blog {% endblock %} {% block
 header %}
 {{ super() }}
-{{render_bottom_header(name)}} {% endblock %} {% block main %}
+{{ render_bottom_header(current_user.user_name) }} {% endblock %} {% block main %}
 			<!-- Menu ******************************* -->
 			{% include 'includes/navigation.html' %}
 			<!-- End of .theme_menu -->
@@ -16,7 +16,7 @@ header %}
 						<div class="single_left_bar">
 							<div class="blogList_single_post clear_fix wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
 										<div class="img_holder">
-									<img src="images/blog/4.jpg" alt="News" class="img-responsive">
+									<img src="{{url_for('static', filename='images/blog/4.jpg')}}  " alt="News" class="img-responsive">
 									<div class="opacity tran3s">
 										<div class="icon">
 											<span><a href="blog-details.html" class="border_round">+</a></span>
@@ -65,7 +65,7 @@ header %}
 														</div>
 														<div class="single-comment-box">
 																<div class="img-box">
-																		<img src="images/gallery/a3.jpg" alt="Awesome Image">
+																		<img src="https://randomuser.me/api/portraits/women/58.jpg" alt="Awesome Image">
 																</div>
 																<div class="text-box">
 																		<div class="top-box">
@@ -92,7 +92,7 @@ header %}
 													</div>
 													<div class="single-comment-box">
 															<div class="img-box">
-																	<img src="images/gallery/a1.jpg" alt="Awesome Image">
+																	<img src="https://randomuser.me/api/portraits/women/90.jpg" alt="Awesome Image">
 															</div>
 															<div class="text-box">
 																<div class="clearfix">
@@ -119,7 +119,7 @@ header %}
 													</div>
 													<div class="single-comment-box comment-reply">
 															<div class="img-box">
-																	<img src="images/gallery/a2.jpg" alt="Awesome Image">
+																	<img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Awesome Image">
 															</div>
 															<div class="text-box">
 																	<div class="clearfix">

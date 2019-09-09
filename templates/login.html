@@ -46,11 +46,17 @@ header %}
         <div class="theme-title">
           <h2>Login Now</h2>
         </div>
-        <form action="#">
+        <form method="POST">
           <div class="form_group">
-            <label>Username or Email</label>
+            <label>Email</label>
             <div class="input_group">
-              <input type="text" placeholder="iamsteelthemes@gmail.com" />
+              <input
+                type="text"
+                placeholder="Enter your email"
+                name="email"
+                id="email"
+                required
+              />
               <i class="fa fa-user" aria-hidden="true"></i>
             </div>
             <!-- End of .input_group -->
@@ -60,7 +66,13 @@ header %}
           <div class="form_group">
             <label>Password</label>
             <div class="input_group">
-              <input type="password" placeholder="********" />
+              <input
+                type="password"
+                placeholder="********"
+                name="password"
+                id="password"
+                required
+              />
               <i class="fa fa-lock" aria-hidden="true"></i>
             </div>
             <!-- End of .input_group -->
@@ -75,10 +87,14 @@ header %}
             <!-- End .single_checkbox -->
             <a href="#" class="float_right">Forgot Password?</a>
           </div>
-          <button class="color1_bg tran3s">Login now</button>
+          <button type="submit" name="login" class="color1_bg tran3s">
+            Login now
+          </button>
         </form>
         <div class="theme-title pull-right">
-          <a href="{{ url_for('signup') }}"><h6>Sign Up</h6></a>
+          <a class="color1_bg tran3s" href="{{ url_for('signup') }}"
+            ><h6 style="color:aliceblue; margin: 0.5em 1em">Sign Up</h6></a
+          >
         </div>
       </div>
       <div class="col-lg-3 col-md-3"></div>

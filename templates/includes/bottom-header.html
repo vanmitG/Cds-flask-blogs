@@ -26,8 +26,19 @@
               <i class="icon-photo"></i>
             </div>
             <div class="login-info">
-              <div class="welcome">Welcome! {{ name }}</div>
+              <!-- <div class="welcome">Welcome! {{ name }}</div> -->
+             
+              <div class="welcome">Welcome! {{ name}}</div>
+         
+              {% if name  %}
+              <a href="{{url_for('logout')}}">Logout</a>   
+              {% else %}
               <a href="{{url_for('login')}}">Login</a>
+              {% endif %}
+              <!-- <a href="{{url_for('logout')}}">Logout</a>
+              <a href="{{url_for('login')}}">Login</a> -->
+              
+              
               <!-- select menu -->
             </div>
           </div>

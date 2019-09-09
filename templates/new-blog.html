@@ -14,26 +14,49 @@
           <div class="theme_title ">
             <h2>your new blog</h2>
           </div>
-          <form>
+          <form method="POST">
             <div class="row">
               <div class="col-md-9">
-                <input type="text" placeholder="Title*" />
+                <input
+                  name="title"
+                  id="title"
+                  type="text"
+                  placeholder="Title*"
+                  required
+                />
               </div>
               <!-- /.col-md-6 -->
               <div class="col-md-9">
-                <input type="text" placeholder="image_url*" />
+                <input
+                  name="img_url"
+                  id="img_url"
+                  type="text"
+                  placeholder="image_url*"
+                />
               </div>
               <!-- /.col-md-6 -->
 
               <div class="col-md-9">
-                <textarea placeholder="inspire quote"></textarea>
+                <textarea
+                  name="quote"
+                  id="quote"
+                  placeholder="inspire quote"
+                  require
+                ></textarea>
               </div>
               <div class="col-md-9">
-                <textarea placeholder="your thought*"></textarea>
+                <textarea
+                  name="body"
+                  id="body"
+                  placeholder="your thought*"
+                  required
+                ></textarea>
               </div>
               <!-- /.col-md-12 -->
               <div class="col-md-9">
-                <button type="submit" class="color1_bg">Post New Blog</button>
+                <button name="create_blog" type="submit" class="color1_bg">
+                  Post New Blog
+                </button>
               </div>
               <!-- /.col-md-12 -->
             </div>

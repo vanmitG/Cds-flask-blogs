@@ -2,9 +2,9 @@
 "macros/bread-crumb.html" import render_breadcrumb %} {% extends "layout.html"
 %} {% block title %} Profile {% endblock %} {% block header %}
 {{ super() }}
-{{ render_bottom_header(name) }} {% endblock %} {% block main %} {% include
-'includes/navigation.html' %}
-{{ render_breadcrumb(name, page_name) }}
+{{ render_bottom_header(current_user.user_name) }} {% endblock %} {% block main
+%} {% include 'includes/navigation.html' %}
+{{ render_breadcrumb(current_user.user_name, page_name) }}
 
 <section class="about-story">
   <div class="container">
@@ -20,7 +20,7 @@
       <div class="col-md-6 col-sm-12">
         <div class="about-text">
           <div class="theme_title">
-            <h3>story about {{ name }}</h3>
+            <h3>story about {{ current_user.user_name }}</h3>
           </div>
           <div class="about_quot">
             Our food should be our medicine,Our medicine organics should be our

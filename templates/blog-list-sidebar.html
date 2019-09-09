@@ -4,11 +4,12 @@
 			{% block title %} Index {% endblock %}
 			{% block header %}
 					{{ super() }}
-					{{render_bottom_header(name)}}
+					{{render_bottom_header(current_user.user_name)}}
+					<h3>{{current_user.user_name}}</h3>
 			{% endblock %}
 			{% block main %}
 				{% include 'includes/navigation.html' %}
-				{{render_breadcrumb(name,page_name)}}
+				{{render_breadcrumb(current_user.user_name,page_name)}}
 				<section class="news single_news_page with_sidebar">
 					<div class="container">
 						<div class="row">

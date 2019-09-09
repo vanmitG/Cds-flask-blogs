@@ -46,13 +46,13 @@ header %}
         <div class="theme-title">
           <h2>Register Here</h2>
         </div>
-        <form action="#">
+        <form method="POST">
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
               <div class="form_group">
                 <label>Username</label>
                 <div class="input_group">
-                  <input type="text" />
+                  <input type="text" name="user_name" id="usename" required />
                   <i class="fa fa-user" aria-hidden="true"></i>
                 </div>
                 <!-- End of .input_group -->
@@ -62,7 +62,12 @@ header %}
               <div class="form_group">
                 <label>Password</label>
                 <div class="input_group">
-                  <input type="password" />
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    required
+                  />
                   <i class="fa fa-lock" aria-hidden="true"></i>
                 </div>
                 <!-- End of .input_group -->
@@ -70,10 +75,10 @@ header %}
               <!-- End of .form_group -->
 
               <div class="form_group">
-                <label>Phone Number</label>
+                <label>First Name</label>
                 <div class="input_group">
-                  <input type="text" />
-                  <i class="fa fa-phone" aria-hidden="true"></i>
+                  <input type="text" name="first_name" id="first_name" />
+                  <i class="fa fa-user" aria-hidden="true"></i>
                 </div>
                 <!-- End of .input_group -->
               </div>
@@ -84,7 +89,7 @@ header %}
               <div class="form_group">
                 <label>Email Address</label>
                 <div class="input_group">
-                  <input type="email" />
+                  <input type="email" name="email" id="email" required />
                   <i class="fa fa-envelope-o" aria-hidden="true"></i>
                 </div>
                 <!-- End of .input_group -->
@@ -94,7 +99,7 @@ header %}
               <div class="form_group">
                 <label>Confirm Password</label>
                 <div class="input_group">
-                  <input type="password" />
+                  <input name="confirm_pass" type="password" />
                   <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                 </div>
                 <!-- End of .input_group -->
@@ -102,14 +107,27 @@ header %}
               <!-- End of .form_group -->
 
               <div class="form_group">
-                <label>Location</label>
+                <label>Last Name</label>
                 <div class="input_group">
-                  <input type="text" />
-                  <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                  <input type="text" name="last_name" id="last_name" />
+                  <i class="fa fa-user" aria-hidden="true"></i>
                 </div>
                 <!-- End of .input_group -->
               </div>
               <!-- End of .form_group -->
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="form_group">
+                  <label>image url</label>
+                  <div class="input_group">
+                    <input name="img_url" id="img_url" type="text" />
+                    <i class="fa fa-image" aria-hidden="true"></i>
+                  </div>
+                  <!-- End of .input_group -->
+                </div>
+                <!-- End of .form_group -->
+              </div>
             </div>
           </div>
           <!-- End of .row -->
@@ -121,8 +139,15 @@ header %}
             </div>
             <!-- End .single_checkbox -->
           </div>
-          <button class="color1_bg tran3s">Create Account</button>
+          <button type="submit" name="signup" class="color1_bg tran3s">
+            Create Account
+          </button>
         </form>
+        <div class="theme-title pull-right">
+          <a class="color1_bg tran3s" href="{{ url_for('login') }}"
+            ><h6 style="color:aliceblue; margin: 0.5em 2em">login</h6></a
+          >
+        </div>
       </div>
       <!-- End of .register_form -->
       <div class="col-lg-2 col-md-2"></div>
