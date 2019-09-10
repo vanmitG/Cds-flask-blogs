@@ -121,7 +121,7 @@ def logout():
 
 @app.route('/blogs/<int:blog_id>')
 @login_required
-def blogDetail(blog_id):
+def blog_detail(blog_id):
     post = Posts.query.get_or_404(blog_id)
     
     post.view_count = post.view_count + 1
@@ -148,7 +148,7 @@ def create_blog():
         db.session.commit()
         flash(
             f'Successfuly create new blog "{new_post.title}".', 'success')
-        return redirect(url_for('blogDetail', id=new_post.id))
+        return redirect(url_for('blog_detail', id=new_post.id))
     else:
         flash('blog was not post correctly! Post again', 'info')
         return render_template('new-blog.html', page_name='Create Blog')

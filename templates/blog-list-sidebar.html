@@ -23,28 +23,28 @@
 								<img src="{{url_for('static', filename = 'images/blog/4.jpg')}}  " alt="News" class="img-responsive">
 								<div class="opacity tran3s">
 									<div class="icon">
-										<span><a href="{{url_for('blogDetail', blog_id = post.id)}}" class="border_round">+</a></span>
+										<span><a href="{{url_for('blog_detail', blog_id = post.id)}}" class="border_round">+</a></span>
 									</div> <!-- End of .icon -->
 								</div> <!-- End of .opacity -->
 							</div> <!-- End of .img_holder -->
 							<div class="post">
 
 								<div class="text">
-									<h4><a href="{{url_for('blogDetail', blog_id=post.id)}}">{{ post.title }}</a></h4>
+									<h4><a href="{{url_for('blog_detail', blog_id=post.id)}}">{{ post.title }}</a></h4>
 									<ul>
-										<li><a href="{{url_for('blogDetail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-user"
+										<li><a href="{{url_for('blog_detail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-user"
 													aria-hidden="true"></i> John abraham</a></li>
-										<li><a href="{{url_for('blogDetail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-tag"
+										<li><a href="{{url_for('blog_detail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-tag"
 													aria-hidden="true"></i> Healthy</a></li>
-										<li><a href="{{url_for('blogDetail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-clock-o"
+										<li><a href="{{url_for('blog_detail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-clock-o"
 													aria-hidden="true"></i> J21st Aug, 2015</a></li>
-										<li><a href="{{url_for('blogDetail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-comments"
+										<li><a href="{{url_for('blog_detail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-comments"
 													aria-hidden="true"></i> 26</a></li>
-										<li><a href="{{url_for('blogDetail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-heart"
+										<li><a href="{{url_for('blog_detail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-heart"
 													aria-hidden="true"></i> 26</a></li>
 									</ul>
 									<p>{{ post.body }} </p>
-									<div class="link float_left"><a href="{{url_for('blogDetail', blog_id=post.id)}}"
+									<div class="link float_left"><a href="{{url_for('blog_detail', blog_id=post.id)}}"
 											class="tran3s color1_bg">READ MORE</a></div>
 									<div class="share_box float_right">
 										<ul class="share-content">
