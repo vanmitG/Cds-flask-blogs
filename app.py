@@ -123,7 +123,6 @@ def logout():
 @login_required
 def blogDetail(blog_id):
     post = Posts.query.get_or_404(blog_id)
-    user = Users.query.filter_by(id=post.author).first_or_404()
     
     post.view_count = post.view_count + 1
     db.session.add(post)
@@ -132,7 +131,7 @@ def blogDetail(blog_id):
     context = {
         'page_name': 'blog',
         'post': post,
-        'author': user
+        'author': post.users
     }
     return render_template('blog-details.html', **context)
 
