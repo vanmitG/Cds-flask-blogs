@@ -55,6 +55,7 @@ class Posts(db.Model):
     img_url = db.Column(db.String(128), default="images/blog/6.png")
     created_date = db.Column(db.DateTime, default=datetime.now)
     updated_date = db.Column(db.DateTime, default=datetime.now)
+    # FIXME: This might need to be author_id. 
     author = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     view_count = db.Column(db.Integer, default=0)
     comments = db.relationship('Comments', backref="posts", lazy="dynamic")
@@ -86,7 +87,7 @@ def load_user(id):
 
 @app.route('/')
 def index():
-    return render_template('blog-list-sidebar.html', page_name="home")
+    return render_template('blog-list-sidebar.html', page_name="home", posts=Posts.query.all())
 
 
 @app.route('/blogs')
@@ -123,7 +124,11 @@ def logout():
 def blogDetail(blog_id):
     post = Posts.query.get_or_404(blog_id)
     user = Users.query.filter_by(id=post.author).first_or_404()
-    # db.session.commit()
+    
+    post.view_count = post.view_count + 1
+    db.session.add(post)
+    db.session.commit()
+
     context = {
         'page_name': 'blog',
         'post': post,
