@@ -86,7 +86,12 @@ def load_user(id):
 
 @app.route('/')
 def index():
-    return render_template('blog-list-sidebar.html', page_name="home")
+    posts = db.session.query(Posts).all()
+    context = {
+        'page_name': 'home',
+        'posts': posts
+    }
+    return render_template('blog-list-sidebar.html', **context)
 
 
 @app.route('/blogs')
@@ -119,7 +124,6 @@ def logout():
 
 
 @app.route('/blogs/<int:blog_id>')
-@login_required
 def blogDetail(blog_id):
     post = Posts.query.get_or_404(blog_id)
     user = Users.query.filter_by(id=post.author).first_or_404()
