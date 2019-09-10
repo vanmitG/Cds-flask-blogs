@@ -4,3 +4,4 @@ note.txt
 .vscode/
 test.html
 *.sql
+__pycache__
