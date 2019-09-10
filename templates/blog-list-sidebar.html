@@ -42,6 +42,37 @@
 													aria-hidden="true"></i> 26</a></li>
 										<li><a href="{{url_for('blogDetail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-heart"
 													aria-hidden="true"></i> 26</a></li>
+													{% if current_user.has_liked_post(post)%}
+										<li>
+											<a
+													  href="{{url_for('like_post' , blog_id=post.id, action ='unlike')}}"
+													  ><i
+														class="fa fa-heart-o fa-lg"
+														aria-hidden="true"
+														style="color: rgb(247, 55, 87)"
+														><span class="badge badge-pill badge-primary">{{
+														  post.likes.count()
+														}}</span></i
+													  >
+													</a>
+										</li>			
+													{% else %}
+										<li>
+											<a
+													  href="{{url_for('like_post' , blog_id=post.id, action ='like')}}"
+													>
+													  <i
+														class="fa fa-heart-o fa-2x"
+														aria-hidden="true"
+														style="color: rgb(81, 144, 238)"
+														><span class="badge badge-pill badge-primary">{{
+														  post.likes.count()
+														}}</span></i
+													  >
+													</a>
+										</li>
+													
+													{% endif %}
 									</ul>
 									<p>{{post.quote}}</p>
 									<div class="link float_left"><a href="{{url_for('blogDetail', blog_id=post.id)}}"
