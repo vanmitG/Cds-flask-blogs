@@ -39,12 +39,26 @@ class Users(UserMixin, db.Model):
     comments = db.relationship("Comments", backref="users", lazy="dynamic")
     created_date = db.Column(db.DateTime, default=datetime.now)
     updated_date = db.Column(db.DateTime, default=datetime.now)
+    likes = db.relationship('PostLikes',  backref='users', lazy='dynamic') 
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+    def like(self,post):
+        if not self.has_liked_post(post):
+            like=PostLikes(user_id=self.id, post_id=post.id)
+            db.session.add(like)
+    def unlike(self,post):
+        if self.has_liked_post(post):
+            PostLikes.query.filter_by(user_id=self.id,post_id=post.id).delete()
+    def has_liked_post(self,post):
+        return PostLikes.query.filter_by(user_id=self.id,post_id=post.id ).count() 
+
+
+
 
 
 class Posts(db.Model):
@@ -68,6 +82,11 @@ class Comments(db.Model):
     updated_date = db.Column(db.DateTime, default=datetime.now)
     author = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     post = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
+
+class PostLikes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    post_id= db.Column(db.Integer, db.ForeignKey('posts.id'))
 
 
 db.create_all()
@@ -133,6 +152,23 @@ def blogDetail(blog_id):
         'author': post.users
     }
     return render_template('blog-details.html', **context)
+
+
+@app.route('/posts/<action>/<int:blog_id>')
+@login_required
+def like_post(blog_id, action):
+    post=Posts.query.filter_by(id=blog_id).first()
+    print('=====', action)
+    if action == 'like':
+        current_user.like(post)
+        db.session.commit()
+       
+
+    else: 
+        current_user.unlike(post)
+        db.session.commit()
+    return redirect(url_for('blogDetail', blog_id=blog_id))
+    
 
 
 @app.route('/create_blog', methods=['POST', 'GET'])
