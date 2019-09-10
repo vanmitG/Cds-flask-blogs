@@ -1,63 +1,70 @@
 {% from "includes/bottom-header.html" import render_bottom_header %}
 {% from "macros/bread-crumb.html" import render_breadcrumb %}
 {% extends "layout.html" %}
-{% block title %} Index {% endblock %}
-{% block header %}
-{{ super() }}
-{{render_bottom_header(current_user.user_name)}}
-<h3>{{current_user.user_name}}</h3>
-{% endblock %}
-{% block main %}
-{% include 'includes/navigation.html' %}
-{{render_breadcrumb(current_user.user_name,page_name)}}
-<section class="news single_news_page with_sidebar">
-	<div class="container">
-		<div class="row">
-			{% for post in posts %}
-			<div class="col-md-9 col-sm-8 col-xs-12">
-				<div class="row">
-					<div class="col-md-12 col-sm-6 col-xs-12">
-						<div class="blogList_single_post clear_fix wow fadeInUp"
-							style="visibility: visible; animation-name: fadeInUp;">
-							<div class="img_holder">
-								<img src="{{url_for('static', filename = 'images/blog/4.jpg')}}  " alt="News" class="img-responsive">
-								<div class="opacity tran3s">
-									<div class="icon">
-										<span><a href="{{url_for('blog_detail', blog_id = post.id)}}" class="border_round">+</a></span>
-									</div> <!-- End of .icon -->
-								</div> <!-- End of .opacity -->
-							</div> <!-- End of .img_holder -->
-							<div class="post">
-
-								<div class="text">
-									<h4><a href="{{url_for('blog_detail', blog_id=post.id)}}">{{ post.title }}</a></h4>
-									<ul>
-										<li><a href="{{url_for('blog_detail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-user"
-													aria-hidden="true"></i> John abraham</a></li>
-										<li><a href="{{url_for('blog_detail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-tag"
-													aria-hidden="true"></i> Healthy</a></li>
-										<li><a href="{{url_for('blog_detail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-clock-o"
-													aria-hidden="true"></i> J21st Aug, 2015</a></li>
-										<li><a href="{{url_for('blog_detail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-comments"
-													aria-hidden="true"></i> 26</a></li>
-										<li><a href="{{url_for('blog_detail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-heart"
-													aria-hidden="true"></i> 26</a></li>
-									</ul>
-									<p>{{ post.body }} </p>
-									<div class="link float_left"><a href="{{url_for('blog_detail', blog_id=post.id)}}"
-											class="tran3s color1_bg">READ MORE</a></div>
-									<div class="share_box float_right">
-										<ul class="share-content">
-											<li><a href="#" class="tran3s popup-share" title="Facebook" target="_blank"><i
-														class="fa fa-facebook" aria-hidden="true"></i></a></li>
-											<li><a href="#" class="tran3s popup-share" title="Twitter" target="_blank"><i
-														class="fa fa-twitter" aria-hidden="true"></i></a></li>
-											<li><a href="#" class="tran3s popup-share" title="Goolge-Plus" target="_blank"><i
-														class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-										</ul>
-										<button class="tran3s share" title="Share This Post"><i class="fa fa-share-alt"
-												aria-hidden="true"></i></button>
+			{% block title %} Index {% endblock %}
+			{% block header %}
+					{{ super() }}
+					{{render_bottom_header(current_user.user_name,current_user.img_url)}}
+			{% endblock %}
+			{% block main %}
+				{% include 'includes/navigation.html' %}
+				{{render_breadcrumb(current_user.user_name,page_name)}}
+				<section class="news single_news_page with_sidebar">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-9 col-sm-8 col-xs-12">
+								<div class="row">
+										
+												{% for post in posts %}
+									<div class="col-md-12 col-sm-6 col-xs-12">
+										<div class="blogList_single_post clear_fix wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+													<div class="img_holder">
+												<img src="{{url_for('static', filename = post.img_url)}}  " alt="News" class="img-responsive">
+												<div class="opacity tran3s">
+													<div class="icon">
+														<span><a href="{{url_for('blogDetail', blog_id = post.id)}}" class="border_round">+</a></span>
+													</div> <!-- End of .icon -->
+												</div> <!-- End of .opacity -->
+											</div> <!-- End of .img_holder -->
+											<div class="post">
+													
+												<div class="text">
+													<h4><a href="{{url_for('blogDetail', blog_id=post.id)}}">Interesting facts about organic food and organic store.</a></h4>
+													<ul>
+														<li><a href="{{url_for('blogDetail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-user" aria-hidden="true"></i> {{author}}</a></li>
+														<li><a href="{{url_for('blogDetail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-tag" aria-hidden="true"></i> Healthy</a></li>
+														<li><a href="{{url_for('blogDetail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-clock-o" aria-hidden="true"></i> J21st Aug, 2015</a></li>
+														<li><a href="{{url_for('blogDetail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-comments" aria-hidden="true"></i> 26</a></li>
+														<li><a href="{{url_for('blogDetail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-heart" aria-hidden="true"></i> 26</a></li>
+													</ul>
+													<p>{{post.quote}}</p>
+													<div class="link float_left"><a href="{{url_for('blogDetail', blog_id=post.id)}}" class="tran3s color1_bg">READ MORE</a></div>
+													<div class="share_box float_right">
+														<ul class="share-content">
+																<li><a href="#" class="tran3s popup-share" title="Facebook" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+																<li><a href="#" class="tran3s popup-share" title="Twitter" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+																<li><a href="#" class="tran3s popup-share" title="Goolge-Plus" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+															</ul>
+														<button class="tran3s share" title="Share This Post"><i class="fa fa-share-alt" aria-hidden="true"></i></button>
+													</div>													
+												</div>
+											</div> <!-- End of .post -->
+												</div>
 									</div>
+									{% endfor %}
+								<ul class="page_pagination">
+									<li><a href="#" class="tran3s"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a></li>
+									<li><a href="#" class="active tran3s">1</a></li>
+									<li><a href="#" class="tran3s">2</a></li>
+									<li><a href="#" class="tran3s">3</a></li>
+									<li><a href="#" class="tran3s"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></li>
+								</ul>
+							</div>
+							<!-- end row -->
+							<div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 sidebar_styleTwo">
+							<!-- _______________________ SIDEBAR ____________________ -->
+									{% include 'includes/side-bar.html' %}
+									<!-- End of .sidebar_styleTwo -->
 								</div>
 
 							</div> <!-- End of .post -->

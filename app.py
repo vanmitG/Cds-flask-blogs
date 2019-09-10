@@ -120,8 +120,7 @@ def logout():
 
 
 @app.route('/blogs/<int:blog_id>')
-@login_required
-def blog_detail(blog_id):
+def blogDetail(blog_id):
     post = Posts.query.get_or_404(blog_id)
     
     post.view_count = post.view_count + 1

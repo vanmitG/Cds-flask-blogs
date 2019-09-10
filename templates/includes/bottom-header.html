@@ -1,4 +1,4 @@
-{% macro render_bottom_header(name) -%}
+{% macro render_bottom_header(name,img_url) -%}
 <div class="bottom_header">
   <div class="container">
     <div class="row">
@@ -23,26 +23,30 @@
         <div class="login_option float_left">
           <div class="login_form">
             <div class="user">
+              {% if img_url %}
+              <img
+                style="border-radius: 50%"
+                src="{{ img_url }}"
+                width="50"
+                height="50"
+                alt=""
+              />
+              {% else %}
               <i class="icon-photo"></i>
+              {% endif %}
             </div>
             <div class="login-info">
-              <!-- <div class="welcome">Welcome! {{ name }}</div> -->
-             
-              <div class="welcome">Welcome! {{ name}}</div>
-         
-              {% if name  %}
-              <a href="{{url_for('logout')}}">Logout</a>   
+              {% if name %}
+              <div class="welcome">Welcome! {{ name }}</div>
+              <a href="{{ url_for('logout') }}">Logout</a>
               {% else %}
-              <a href="{{url_for('login')}}">Login</a>
-              {% endif %}
-              <!-- <a href="{{url_for('logout')}}">Logout</a>
-              <a href="{{url_for('login')}}">Login</a> -->
-              
-              
-              <!-- select menu -->
+              <div class="welcome">
+                Welcome! Guest </div>
+                <a href="{{ url_for('login') }}">Login</a>
+                {% endif %}
+                <!-- select menu -->
+              </div>
             </div>
-          </div>
-            </ul>
           </div>
           <!-- End of .cart_list -->
         </div>

@@ -2,8 +2,8 @@
 "macros/bread-crumb.html" import render_breadcrumb %} {% extends "layout.html"
 %} {% block title %} Profile {% endblock %} {% block header %}
 {{ super() }}
-{{ render_bottom_header(current_user.user_name) }} {% endblock %} {% block main
-%} {% include 'includes/navigation.html' %}
+{{ render_bottom_header(current_user.user_name, current_user.img_url) }} {%
+endblock %} {% block main %} {% include 'includes/navigation.html' %}
 {{ render_breadcrumb(current_user.user_name, page_name) }}
 
 <section class="about-story">
