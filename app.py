@@ -17,15 +17,15 @@ login_mgr.init_app(app)
 # db = SQLAlchemy(app)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ('DATABASE_URL')
 db = SQLAlchemy(app)
 
 migrate = Migrate(app, db)
 
 
-class Test(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(80))
+# class Test(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     first_name = db.Column(db.String(80))
 
 
 class Users(UserMixin, db.Model):
