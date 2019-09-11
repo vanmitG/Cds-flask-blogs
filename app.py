@@ -7,7 +7,7 @@ from datetime import datetime
 from flask_migrate import Migrate
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ('SECRET_KEY')
+app.config['SECRET_KEY'] = 'KhoaTheBestDestroyer'
 login_mgr = LoginManager(app)
 login_mgr.login_view = 'login'
 login_mgr.init_app(app)
