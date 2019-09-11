@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask_sqlalchemy import SQLAlchemy
@@ -6,7 +7,7 @@ from datetime import datetime
 from flask_migrate import Migrate
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "KhoaTheBestDestroyer"
+app.config['SECRET_KEY'] = os.environ('SECRET_KEY')
 login_mgr = LoginManager(app)
 login_mgr.login_view = 'login'
 login_mgr.init_app(app)
@@ -16,7 +17,7 @@ login_mgr.init_app(app)
 # db = SQLAlchemy(app)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://coderSchool:abc123@localhost:5432/blogsCDS'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ('DATABASE_URL')
 db = SQLAlchemy(app)
 
 migrate = Migrate(app, db)
@@ -39,26 +40,29 @@ class Users(UserMixin, db.Model):
     comments = db.relationship("Comments", backref="users", lazy="dynamic")
     created_date = db.Column(db.DateTime, default=datetime.now)
     updated_date = db.Column(db.DateTime, default=datetime.now)
-    likes = db.relationship('PostLikes',  backref='users', lazy='dynamic') 
+    # likes = db.relationship('PostLikes',  backref='users', lazy='dynamic')
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-    
-    def like(self,post):
-        if not self.has_liked_post(post):
-            like=PostLikes(user_id=self.id, post_id=post.id)
-            db.session.add(like)
-    def unlike(self,post):
-        if self.has_liked_post(post):
-            PostLikes.query.filter_by(user_id=self.id,post_id=post.id).delete()
-    def has_liked_post(self,post):
-        return PostLikes.query.filter_by(user_id=self.id,post_id=post.id ).count() 
 
+    def __repr__(self):
+        return '<User %r>' % self.email
 
+    # def like(self, post):
+    #     if not self.has_liked_post(post):
+    #         like = PostLikes(user_id=self.id, post_id=post.id)
+    #         db.session.add(like)
 
+    # def unlike(self, post):
+    #     if self.has_liked_post(post):
+    #         PostLikes.query.filter_by(
+    #             user_id=self.id, post_id=post.id).delete()
+
+    # def has_liked_post(self, post):
+    #     return PostLikes.query.filter_by(user_id=self.id, post_id=post.id).count()
 
 
 class Posts(db.Model):
@@ -69,10 +73,13 @@ class Posts(db.Model):
     img_url = db.Column(db.String(128), default="images/blog/6.png")
     created_date = db.Column(db.DateTime, default=datetime.now)
     updated_date = db.Column(db.DateTime, default=datetime.now)
-    # FIXME: This might need to be author_id. 
+    # FIXME: This might need to be author_id.
     author = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     view_count = db.Column(db.Integer, default=0)
     comments = db.relationship('Comments', backref="posts", lazy="dynamic")
+
+    def __repr__(self):
+        return '<Post %r>' % self.title
 
 
 class Comments(db.Model):
@@ -83,10 +90,11 @@ class Comments(db.Model):
     author = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     post = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
 
-class PostLikes(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    post_id= db.Column(db.Integer, db.ForeignKey('posts.id'))
+
+# class PostLikes(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+#     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
 
 
 db.create_all()
@@ -106,14 +114,19 @@ def load_user(id):
 
 @app.route('/')
 def index():
-    return render_template('blog-list-sidebar.html', page_name="home", posts=Posts.query.all())
+    posts = Posts.query.all()
+    context = {
+        'page_name': 'home',
+        'posts': posts
+    }
+    return render_template('blog-list-sidebar.html', **context)
 
 
 @app.route('/blogs')
 def blogs():
     return redirect(url_for('index'))
 
-
+# TODO use wtf for data validation
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == "POST":
@@ -141,7 +154,6 @@ def logout():
 @app.route('/blogs/<int:blog_id>')
 def blogDetail(blog_id):
     post = Posts.query.get_or_404(blog_id)
-    
     post.view_count = post.view_count + 1
     db.session.add(post)
     db.session.commit()
@@ -154,21 +166,18 @@ def blogDetail(blog_id):
     return render_template('blog-details.html', **context)
 
 
-@app.route('/posts/<action>/<int:blog_id>')
-@login_required
-def like_post(blog_id, action):
-    post=Posts.query.filter_by(id=blog_id).first()
-    print('=====', action)
-    if action == 'like':
-        current_user.like(post)
-        db.session.commit()
-       
-
-    else: 
-        current_user.unlike(post)
-        db.session.commit()
-    return redirect(url_for('blogDetail', blog_id=blog_id))
-    
+# @app.route('/posts/<action>/<int:blog_id>')
+# @login_required
+# def like_post(blog_id, action):
+#     post = Posts.query.filter_by(id=blog_id).first()
+#     print('=====', action)
+#     if action == 'like':
+#         current_user.like(post)
+#         db.session.commit()
+#     else:
+#         current_user.unlike(post)
+#         db.session.commit()
+#     return redirect(url_for('blogDetail', blog_id=blog_id))
 
 
 @app.route('/create_blog', methods=['POST', 'GET'])
@@ -183,9 +192,9 @@ def create_blog():
         db.session.commit()
         flash(
             f'Successfuly create new blog "{new_post.title}".', 'success')
-        return redirect(url_for('blog_detail', id=new_post.id))
+        return redirect(url_for('blogDetail', blog_id=new_post.id))
     else:
-        flash('blog was not post correctly! Post again', 'info')
+        flash('Lets make some blog', 'info')
         return render_template('new-blog.html', page_name='Create Blog')
 
 
@@ -209,9 +218,12 @@ def signup():
 
 
 @app.route('/profile')
-@login_required
 def profile():
-    return render_template('profile.html', page_name='profile', id=1)
+    context = {
+        'page_name': 'blog'
+        # ,'profile_id': profile_id
+    }
+    return render_template('profile.html', **context)
 
 
 @app.errorhandler(404)

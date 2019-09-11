@@ -5,3 +5,4 @@ note.txt
 test.html
 *.sql
 __pycache__
+blog-app.config

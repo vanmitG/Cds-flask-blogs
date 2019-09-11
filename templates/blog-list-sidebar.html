@@ -29,8 +29,7 @@
 							<div class="post">
 
 								<div class="text">
-									<h4><a href="{{url_for('blogDetail', blog_id=post.id)}}">Interesting facts about organic food and
-											organic store.</a></h4>
+									<h4><a href="{{url_for('blogDetail', blog_id=post.id)}}">{{post.title}}</a></h4>
 									<ul>
 										<li><a href="{{url_for('blogDetail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-user"
 													aria-hidden="true"></i> {{post.users.user_name}}</a></li>
@@ -42,37 +41,19 @@
 													aria-hidden="true"></i> 26</a></li>
 										<li><a href="{{url_for('blogDetail', blog_id=post.id)}}" class="tran3s"><i class="fa fa-heart"
 													aria-hidden="true"></i> 26</a></li>
-													{% if current_user.has_liked_post(post)%}
 										<li>
 											<a
-													  href="{{url_for('like_post' , blog_id=post.id, action ='unlike')}}"
-													  ><i
+														href="#"></a>
+													  <i
 														class="fa fa-heart-o fa-lg"
 														aria-hidden="true"
 														style="color: rgb(247, 55, 87)"
-														><span class="badge badge-pill badge-primary">{{
+														><span class="badge badge-pill badge-primary">
 														  post.likes.count()
-														}}</span></i
+														</span></i
 													  >
 													</a>
 										</li>			
-													{% else %}
-										<li>
-											<a
-													  href="{{url_for('like_post' , blog_id=post.id, action ='like')}}"
-													>
-													  <i
-														class="fa fa-heart-o fa-2x"
-														aria-hidden="true"
-														style="color: rgb(81, 144, 238)"
-														><span class="badge badge-pill badge-primary">{{
-														  post.likes.count()
-														}}</span></i
-													  >
-													</a>
-										</li>
-													
-													{% endif %}
 									</ul>
 									<p>{{post.quote}}</p>
 									<div class="link float_left"><a href="{{url_for('blogDetail', blog_id=post.id)}}"
@@ -103,12 +84,6 @@
 					</ul>
 				</div>
 				<!-- end row -->
-				<div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 sidebar_styleTwo">
-					<!-- _______________________ SIDEBAR ____________________ -->
-					{% include 'includes/side-bar.html' %}
-					<!-- End of .sidebar_styleTwo -->
-				</div>
-
 			</div> <!-- End of .post -->
 		</div>
 	</div>
