@@ -3,7 +3,7 @@
 {% extends "layout.html" %} {% block title %} Blog {% endblock %} {% block
 header %}
 {{ super() }}
-{{ render_bottom_header(current_user.user_name) }} {% endblock %} {% block main %}
+{{ render_bottom_header(current_user.user_name,current_user.img_url) }} {% endblock %} {% block main %}
 			<!-- Menu ******************************* -->
 			{% include 'includes/navigation.html' %}
 			<!-- End of .theme_menu -->
@@ -16,7 +16,7 @@ header %}
 						<div class="single_left_bar">
 							<div class="blogList_single_post clear_fix wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
 										<div class="img_holder">
-									<img src="{{url_for('static', filename=post.img_url)}}  " alt="News" class="img-responsive">
+									<img src="{{post.img_url}}  " alt="News" class="img-responsive">
 									<div class="opacity tran3s">
 										<div class="icon">
 											<span><a href="#" class="border_round"><i class="fa fa-heart"></i></a></span>
