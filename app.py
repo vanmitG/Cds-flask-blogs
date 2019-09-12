@@ -7,7 +7,7 @@ from datetime import datetime
 from flask_migrate import Migrate
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'KhoaTheBestDestroyer'
+app.config['SECRET_KEY'] = os.environ['CFB_SECRET_KEY']
 login_mgr = LoginManager(app)
 login_mgr.login_view = 'login'
 login_mgr.init_app(app)
@@ -19,6 +19,7 @@ login_mgr.init_app(app)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
+
 
 migrate = Migrate(app, db)
 
@@ -70,7 +71,8 @@ class Posts(db.Model):
     title = db.Column(db.String, nullable=False)
     quote = db.Column(db.String, nullable=False)
     body = db.Column(db.Text, nullable=False)
-    img_url = db.Column(db.String(128), default="images/blog/6.png")
+    img_url = db.Column(db.String(
+        128), default='https://images.unsplash.com/photo-1545238140-1438c383fed0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80')
     created_date = db.Column(db.DateTime, default=datetime.now)
     updated_date = db.Column(db.DateTime, default=datetime.now)
     # FIXME: This might need to be author_id.
